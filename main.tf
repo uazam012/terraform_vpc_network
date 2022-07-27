@@ -1,5 +1,5 @@
 module "test-vpc-module" {
-  source       = "./global/terraform-task"
+  source       = "./modules/terraform-task-network"
   project_id   = "practice-354222"
   network_name = "test-network"
   net_mtu          = 1460

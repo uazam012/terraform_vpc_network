@@ -38,7 +38,7 @@ resource "google_compute_router_nat" "nat" {
 }
 
 
-# // Firewall Rules apply
+// Firewall Rules apply
 
 # resource "google_compute_firewall" "rules" {
 #   project     = var.project_id
