@@ -18,20 +18,11 @@ variable "net_mtu" {
     description = "mtu number which is used in vpc_network and by default is 1460"
 }
 
-# variable "subnets" {
-#     type = list(object({
-#     subnet_name                     = string
-#     subnet_ip                       = string
-#     subnet_region                   = string
-#     # subnet_private_access           = bool
-#     # subnet_flow_logs                = bool
-#     }))
-# }
-
 variable "subnets" {
   description = "Custom Subnet Name "
   type        = map(any)
 }
+
 //variables
 
 # variable "secondary_range_name" {
@@ -50,7 +41,7 @@ variable "subnets" {
 # }
 
 
-//////
+////// Router and Nat Gateway Variables.
 
 variable "router_name" {
     type = string
