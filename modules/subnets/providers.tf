@@ -7,8 +7,4 @@ terraform {
       version = "<5.0,>= 2.12"
     }
   }
-
-  provider_meta "google" {
-    module_name = "blueprints/terraform/terraform-google-network:subnets/v5.1.0"
-  }
 }

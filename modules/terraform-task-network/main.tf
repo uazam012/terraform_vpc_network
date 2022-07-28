@@ -6,6 +6,10 @@ resource "google_compute_network" "vpc_network" {
   mtu                     = var.net_mtu
   description             = var.network_description
   auto_create_subnetworks = false
+  routing_mode            = "REGIONAL" //regional; ya gloabl
+  enable_ula_internal_ipv6 =  "" //(Optional) Enable ULA internal ipv6 on this network. Enabling this feature will assign a /48 from google defined ULA prefix fd20::/20.
+  internal_ipv6_range     = "" 
+  delete_default_routes_on_create  = ""  //(Optional) If set to true, default routes (0.0.0.0/0) will be deleted immediately after network creation. Defaults to false.
 }
 
 resource "google_compute_subnetwork" "subnets" {
@@ -17,6 +21,20 @@ resource "google_compute_subnetwork" "subnets" {
   private_ip_google_access = lookup(each.value, "subnet_private_ip_google_access", "false")
   region                   = each.value.subnet_region
   network                  = google_compute_network.vpc_network.name
+  purpose = "" //A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing.
+  role = "" //ACTIVE and BACKUP //(Optional) The role of subnetwork. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP.
+  stack_type       = "IPV4_IPV6"
+  ipv6_access_type = "EXTERNAL"
+  secondary_ip_range {
+    range_name    = "tf-test-secondary-range-update1"
+    ip_cidr_range = "192.168.10.0/24"
+  }
+
+  log_config {
+    aggregation_interval = "INTERVAL_10_MIN"
+    flow_sampling        = 0.5
+    metadata             = "INCLUDE_ALL_METADATA"
+  }
 }
 
 // Nat Gateway and Cloud Router
