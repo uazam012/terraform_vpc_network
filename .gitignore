@@ -2,11 +2,10 @@
 # .gitignore
 #----------------------------------------------------------------------------
 # Local .terraform directories
-terraform.tfstate.backup
 */.terraform/
 # .tfstate files
 *.tfstate
-.tfstate.
+*.tfstate.*
 # Crash log files
 crash.log
 # Ignore any .tfvars files that are generated automatically for each Terraform
