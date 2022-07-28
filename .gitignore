@@ -2,6 +2,7 @@
 # .gitignore
 #----------------------------------------------------------------------------
 # Local .terraform directories
+terraform.tfstate.backup
 */.terraform/
 # .tfstate files
 *.tfstate
