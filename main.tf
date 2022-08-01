@@ -49,15 +49,15 @@ module "subnet-vpc-module" {
       subnet_region            = "asia-south1"
     }
   }
-  # secondary_ranges = {
-  #       subnet-01 = [
-  #           {
-  #               range_name    = "public-b-secondary-01"
-  #               ip_cidr_range = "192.168.64.0/24"
-  #           },
-  #       ]
-  #       subnet-02 = []
-  #   }
+  secondary_ranges = {
+        public-b = [
+            {
+                range_name    = "public-b-secondary-01"
+                ip_cidr_range = "192.168.64.0/24"
+            },
+        ]
+        public-c = []
+    }
 }
 
 # router_name       = "router-terraform"
