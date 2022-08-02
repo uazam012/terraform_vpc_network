@@ -2,12 +2,49 @@ repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v3.4.0
   hooks:
-    - id: trailing-whitespace
+        - id: check-added-large-files
+    - id: check-merge-conflict
+    - id: check-vcs-permalinks
+    - id: forbid-new-submodules
+    - id: no-commit-to-branch
+
+    # Common errors
     - id: end-of-file-fixer
+    - id: trailing-whitespace
+      args: [--markdown-linebreak-ext=md]
+      exclude: CHANGELOG.md
     - id: check-yaml
+    - id: check-merge-conflict
+    - id: check-executables-have-shebangs
+
+    # Cross platform
+    - id: check-case-conflict
+    - id: mixed-line-ending
+      args: [--fix=lf]
 
 - repo: https://github.com/antonbabenko/pre-commit-terraform
   rev: v1.48.0
   hooks:
     - id: terraform_fmt
     - id: terraform_validate
+
+ repo: https://github.com/jumanjihouse/pre-commit-hooks
+  rev: 2.1.6
+  hooks:
+    - id: shfmt
+      args: ['-l', '-i', '2', '-ci', '-sr', '-w']
+    - id: shellcheck
+
+- repo: https://github.com/hadolint/hadolint
+  rev: v2.10.0
+  hooks:
+    - id: hadolint
+      args: [
+        '--ignore', 'DL3027', # Do not use apt
+        '--ignore', 'DL3007', # Using latest
+        '--ignore', 'DL4006', # Not related to alpine
+        '--ignore', 'SC1091', # Useless check
+        '--ignore', 'SC2015', # Useless check
+        '--ignore', 'SC3037', # Not related to alpine
+        '--ignore', 'DL3013', # Pin versions in pip
+      ]
